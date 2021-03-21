@@ -17,22 +17,29 @@
         <header>
             <h1>Weather Dashboard</h1>
         </header >
+        
         <div class = "container">
             <div class = "row">
+                <!-- Left side:history of cities searched -->
                 <aside class = "col-md-3">
                     <h3>Search for a City:</h3>
                     <input type="text" class = "text">
                     <button class = "btn-lg btn-info" id = "search"><i class="fa fa-search" aria-hidden="true"></i></button>
                     <table id = "history"></table>
                 </aside>
+                <!-- right side with today's details -->
                 <main class = "col-md-9">
                     <div class = "details">
-                        <h2 class = "city"><span id = "date"></span> <span id = "icon"></span></h2>
+                        <h2 class = "city"></h2><span id = "date"></span> <span id = "icon"></span>
+                        <br>
+                        <p> </p>
                         <p>Temperature: <span id = "temp"></span></p>
                         <p>Humidity: <span id = "humidity"></span></p>
                         <p>Windspeed: <span id = "windSpeed"></span></p>
                         <p>UV Index <span id = "uvIndex"></span></p>
                     </div>
+
+                    <!-- 5 day forecast cards of searched city -->
                     <div>
                         <div class = "searchInfo container"></div>
                         <div id = "forecast" class = "row">
@@ -48,7 +55,7 @@
                                 <p >Humidity: <span id = "twoHum"></span></p>
                             </div>
                             <div class = "daily card">
-                                <h4 id = dayThre></h4>
+                                <h4 id = dayThree></h4>
                                 <p >Temp: <span id = "threeTemp"></span></p>
                                 <p >Humidity: <span id = "threeHum"></span></p>
                             </div>
@@ -58,7 +65,7 @@
                                 <p >Humidity: <span id = "fourHum"></span></p>
                             </div >
                             <div class = "daily card">
-                                <h4 id = dayFiv></h4>
+                                <h4 id = dayFive></h4>
                                 <p >Temp: <span id = "fiveTemp"></span></p>
                                 <p >Humidity: <span id = "fiveHum"></span></p>
                             </div>

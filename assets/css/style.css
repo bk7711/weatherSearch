@@ -1,3 +1,13 @@
+/* header */
+h1{
+    text-align: center;
+    background-color: rgb(66, 64, 64);
+    color: white;
+    padding: 7px;
+}
+
+
+/*city search*/
 .btn-lg{
     height: 30px;
     /* margin:3px 3px 9px 3px; */
@@ -10,13 +20,6 @@
     max-width:100%;
 }
 
-h1{
-    text-align: center;
-    background-color: rgb(66, 64, 64);
-    color: white;
-    padding: 7px;
-}
-
 aside{
     justify-content:start;
     background-color: rgb(238, 235, 235);
@@ -25,26 +28,48 @@ aside{
 .text{
     width:250px;
 }
+
 table{
     border: 1px solid grey;
     width:250px;
 }
-.details{
-    border: 1px solid grey;
-}
-.searchInfo{
-    max-height: 400px;
-}
+
 .tr{
     width: 100%;
     background-color: whitesmoke;
     color: rgb(114, 112, 112);
     border: 1px solid grey;
 }
+
+
+/* today's data for city searched */
+.city{
+    float:left;
+}
+#date{
+    font-size:1.5em;
+    font-weight: 500;
+    padding:7px 5px 5px 15px;
+}
+p{
+    display:block;
+    text-align: left;
+}
+
+.details{
+    border: 1px solid grey;
+}
+
+.searchInfo{
+    max-height: 400px;
+}
+
+/* 5-day forecast cards */
 .daily{
     background-color: rgb(5, 54, 54);
     color:whitesmoke;
 }
+
 .card{
     max-width:200px;
     margin:3px;
