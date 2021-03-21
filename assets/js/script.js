@@ -5,6 +5,8 @@ var forecastEl = document.getElementById("forecast");
 var specifics = document.querySelector(".specifics");
 var searchEl = document.getElementById("search");
 var cities = [];
+var fiveDay = [];
+// var today = moment();
 var lat;
 var lon;
 
@@ -37,25 +39,40 @@ searchEl.addEventListener("click", function(){
                             .then(function(data){
                                 console.log(data);
                                 document.getElementById('temp').innerHTML = `${data.current.temp} Degrees`;
-                                document.getElementById('humidity').innerHTML = `${data.current.humidity}`;
+                                document.getElementById('humidity').innerHTML = `${data.current.humidity}%`;
                                 document.getElementById('windSpeed').innerHTML = `${data.current.wind_speed} mph`;
                                 document.getElementById('uvIndex').innerHTML = `${data.current.uvi}`;
-                                // console.log(data.current.temp);
-                                // console.log(data.current.humidity);
-                                // console.log(data.current.wind_speed);
-                                // console.log(data.current.uvi);
-
                                 document.getElementById('oneTemp').innerHTML = `${data.current.temp} Degrees`;
-                                document.getElementById('oneHum').innerHTML = `${data.current.humidity}`;
+                                document.getElementById('oneHum').innerHTML = `${data.current.humidity}%`;
+                                if(data.current.weather.main==="cloudy"){
+                                    document.getElementById('icon')
+                                    document.createElement("i");
+                                    // document.getElementById("icon").appendChild(i);
+                                    i.setAttributeNode("class", "fas fa-cloud");
+                                }else if(data.current.weather.main==="rain"){
+                                    document.getElementById('icon')
+                                    document.createElement("i");
+                                    // document.getElementById("icon").appendChild(i);
+                                    i.setAttributeNode("class", "fas fa-cloud-rain");
+                                }else{
+                                    document.getElementById('icon')
+                                    document.createElement("i");
+                                    // document.getElementById("icon").appendChild(i);
+                                    i.setAttributeNode("class", "fas fa-sun");
+                                }
+                                fiveDay = data.daily;
+                                console.log(fiveDay);
+                                
+                                
 
-                                document.getElementById('twoTemp').innerHTML = `${data.daily.Array[1].temp} Degrees`;
-                                document.getElementById('twoHum').innerHTML = `${data.daily.Array[1].humidity}`;
-                                document.getElementById('threeTemp').innerHTML = `${data.daily.Array[2].temp} Degrees`;
-                                document.getElementById('threeHum').innerHTML = `${data.daily.Array[2].humidity}`;
-                                document.getElementById('fourTemp').innerHTML = `${data.daily.Array[3].temp} Degrees`;
-                                document.getElementById('fourHum').innerHTML = `${data.daily.Array[3].humidity}`;
-                                document.getElementById('fiveTemp').innerHTML = `${data.daily.Array[4].temp} Degrees`;
-                                document.getElementById('fiveHum').innerHTML = `${data.daily.Array[4].humidity}`;
+                                // document.getElementById('twoTemp').innerHTML = `${fiveDay[1].daily.temp.max} Degrees`;
+                                // document.getElementById('twoHum').innerHTML = `${fiveDay[1].daily.humidity}%`;
+                                // document.getElementById('threeTemp').innerHTML = `${fiveDay[2].daily.temp.max} Degrees`;
+                                // document.getElementById('threeHum').innerHTML = `${fiveDay[2].daily.humidity}%`;
+                                // document.getElementById('fourTemp').innerHTML = `${fiveDay[3].daily.temp.max} Degrees`;
+                                // document.getElementById('fourHum').innerHTML = `${fiveDay[3].daily.humidity}%`;
+                                // document.getElementById('fiveTemp').innerHTML = `${fiveDay[4].daily.temp.max} Degrees`;
+                                // document.getElementById('fiveHum').innerHTML = `${fiveDay[1].daily.humidity}%`;
                             })
 
                         textEl.value ='';
@@ -64,8 +81,8 @@ searchEl.addEventListener("click", function(){
         
   });      
 
-
 function renderMessage(){
+    // document.getElementById('date').textContent = moment().format(MM/DD/YY);
     var history = JSON.parse(localStorage.getItem("cityHistory"));
     if(history !== null){
         for(i = 0; i<history.length; i++){
