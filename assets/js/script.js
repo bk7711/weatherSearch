@@ -5,6 +5,8 @@ var forecastEl = document.getElementById("forecast");
 var specifics = document.querySelector(".specifics");
 var searchEl = document.getElementById("search");
 var uv = document.getElementById("uvIndex");
+var iconEl = document.getElementById('icon')
+var current = {};
 var data;
 var cities = [];
 var fiveDay = [];
@@ -63,8 +65,10 @@ searchEl.addEventListener("click", function(){
                                 return response.json();
                             })
                             .then(function(data){
-                                // console.log(data);
+                                console.log(data);
                                 fiveDay = data.daily;
+                                current = data.current;
+                                console.log(current);
                                 // console.log(fiveDay);
                 
                                 //fill in today's data for city searched
@@ -72,7 +76,8 @@ searchEl.addEventListener("click", function(){
                                 document.getElementById('humidity').innerHTML = `${data.current.humidity}%`;
                                 document.getElementById('windSpeed').innerHTML = `${data.current.wind_speed} mph`;
                                 document.getElementById('uvIndex').innerHTML = `${Math.round(data.current.uvi)}`;
-                            
+                                
+                                icon();
                                     //uv index warning colors
                                         if(uv.textContent>=0 && uv.textContent<4){
                                             uv.setAttribute("style", "background-color:rgb(7, 179, 21);");
@@ -104,25 +109,24 @@ searchEl.addEventListener("click", function(){
   });   
  //post an icon for today's weather report 
 function icon(){
-    if(data.current.weather[0].main==="cloudy"){
-            var i = document.getElementById('icon')
-            i.innerHTML("<i></i>");
-            // document.getElementById("icon").appendChild(i);
-            i.createAttribute("class");
-            i.setAttributeNode("fas fa-cloud");
-    }
-    else if(data.current.weather[0].main==="rain"){
-        var i = document.getElementById('icon')
-        i.innerHTML("<i></i>");
-        // document.getElementById("icon").appendChild(i);
-        i.createAttribute("class");
-        i.setAttributeNode("fas fa-cloud-rain");
-    }else if(data.current.weather[0].main==="clear"){
-        var i = document.getElementById('icon')
-        i.innerHTML("<i></i>");
-        // document.getElementById("icon").appendChild(i);
-        i.createAttribute("class");
-        i.setAttributeNode("fas fa-sun");
+    if(current.weather[0].main=="Clouds"){
+        var icon = iconEl.innerHTML
+        icon = document.createElement('iframe');
+        icon.setAttribute("class","far fa-cloud");
+        iconEl.append(icon);
+            
+    }else if(current.weather[0].main=="Rain"){
+        var icon = iconEl.innerHTML
+        icon = document.createElement('iframe');
+        icon.setAttribute("class","far fa-cloud-rain");
+        iconEl.append(icon);
+        
+    }else if(current.weather[0].main=="Clear"){
+        var icon = iconEl.innerHTML
+        icon = document.createElement('iframe');
+        icon.setAttribute("class","far fa-sun");
+        iconEl.append(icon);
+    
     }
 }  
 
