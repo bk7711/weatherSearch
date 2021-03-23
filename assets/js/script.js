@@ -12,6 +12,7 @@ var cities = [];
 var fiveDay = [];
 var lat;
 var lon;
+var weather;
 
 //post today's date and dates of 5 day forecast
 function todayDate(){
@@ -65,11 +66,14 @@ searchEl.addEventListener("click", function(){
                                 return response.json();
                             })
                             .then(function(data){
-                                console.log(data);
+                                
                                 fiveDay = data.daily;
                                 current = data.current;
-                                console.log(current);
-                                // console.log(fiveDay);
+                                //post an icon for today's weather report   
+                                weather = current.weather[0].icon;
+                                var iconUrl =  `http://openweathermap.org/img/w/${weather}.png`;
+                                iconEl.setAttribute("src",iconUrl);
+                                
                 
                                 //fill in today's data for city searched
                                 document.getElementById('temp').innerHTML = `${data.current.temp} Degrees`;
@@ -77,7 +81,7 @@ searchEl.addEventListener("click", function(){
                                 document.getElementById('windSpeed').innerHTML = `${data.current.wind_speed} mph`;
                                 document.getElementById('uvIndex').innerHTML = `${Math.round(data.current.uvi)}`;
                                 
-                                icon();
+                                // icon();
                                     //uv index warning colors
                                         if(uv.textContent>=0 && uv.textContent<4){
                                             uv.setAttribute("style", "background-color:rgb(7, 179, 21);");
@@ -107,28 +111,7 @@ searchEl.addEventListener("click", function(){
             })
         
   });   
- //post an icon for today's weather report 
-function icon(){
-    if(current.weather[0].main=="Clouds"){
-        var icon = iconEl.innerHTML
-        icon = document.createElement('iframe');
-        icon.setAttribute("class","far fa-cloud");
-        iconEl.append(icon);
-            
-    }else if(current.weather[0].main=="Rain"){
-        var icon = iconEl.innerHTML
-        icon = document.createElement('iframe');
-        icon.setAttribute("class","far fa-cloud-rain");
-        iconEl.append(icon);
-        
-    }else if(current.weather[0].main=="Clear"){
-        var icon = iconEl.innerHTML
-        icon = document.createElement('iframe');
-        icon.setAttribute("class","far fa-sun");
-        iconEl.append(icon);
-    
-    }
-}  
+ 
 
 function renderMessage(){
     // document.getElementById('date').textContent = moment().format(MM/DD/YY);
