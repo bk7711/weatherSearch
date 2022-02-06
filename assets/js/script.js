@@ -54,6 +54,7 @@ searchEl.addEventListener("click", function(){
                 return response.json();
             })
             .then(function(data){
+                console.log(data);
                 lat =  (data.coord.lat);
                 lon = (data.coord.lon);
             }) 
@@ -66,7 +67,7 @@ searchEl.addEventListener("click", function(){
                                 return response.json();
                             })
                             .then(function(data){
-                                
+                                console.log(data)
                                 fiveDay = data.daily;
                                 current = data.current;
                                 //post an icon for today's weather report   
@@ -93,16 +94,43 @@ searchEl.addEventListener("click", function(){
                                  //fill in data for 5 day forecast of city searched       
                                 document.getElementById('oneTemp').innerHTML = `${data.current.temp} Degrees`;
                                 document.getElementById('oneHum').innerHTML = `${data.current.humidity}%`;
-                                
+                                document.getElementById('oneWind').innerHTML = `${data.current.wind_speed}%`;
+                                var dayWeather = data.current.weather[0].icon
+                                var dayIconUrl = `http://openweathermap.org/img/w/${dayWeather}.png`
+                                var dayIconUrlEl = document.querySelector(".dayOneIcon");
+                                dayIconUrlEl.setAttribute("src", dayIconUrl) ;
+
                                 document.getElementById('twoTemp').innerHTML = `${fiveDay[1].temp.max} Degrees`;
                                 document.getElementById('twoHum').innerHTML = `${fiveDay[1].humidity}%`;
+                                document.getElementById('twoWind').innerHTML = `${fiveDay[1].wind_speed}%`;
+                                dayWeather = `${fiveDay[1].weather[0].icon}`
+                                dayIconUrl = `http://openweathermap.org/img/w/${dayWeather}.png`
+                                dayIconUrlEl = document.querySelector(".dayTwoIcon");
+                                dayIconUrlEl.setAttribute("src", dayIconUrl) ;
 
                                 document.getElementById('threeTemp').innerHTML = `${fiveDay[2].temp.max} Degrees`;
                                 document.getElementById('threeHum').innerHTML = `${fiveDay[2].humidity}%`;
+                                document.getElementById('threeWind').innerHTML = `${fiveDay[2].wind_speed}%`;
+                                dayWeather = `${fiveDay[2].weather[0].icon}`
+                                dayIconUrl = `http://openweathermap.org/img/w/${dayWeather}.png`
+                                dayIconUrlEl = document.querySelector(".dayThreeIcon");
+                                dayIconUrlEl.setAttribute("src", dayIconUrl) ;
+
                                 document.getElementById('fourTemp').innerHTML = `${fiveDay[3].temp.max} Degrees`;
                                 document.getElementById('fourHum').innerHTML = `${fiveDay[3].humidity}%`;
+                                document.getElementById('fourWind').innerHTML = `${fiveDay[3].wind_speed}%`;
+                                dayWeather = `${fiveDay[1].weather[0].icon}`
+                                dayIconUrl = `http://openweathermap.org/img/w/${dayWeather}.png`
+                                dayIconUrlEl = document.querySelector(".dayFourIcon");
+                                dayIconUrlEl.setAttribute("src", dayIconUrl);
+
                                 document.getElementById('fiveTemp').innerHTML = `${fiveDay[4].temp.max} Degrees`;
-                                document.getElementById('fiveHum').innerHTML = `${fiveDay[1].humidity}%`;   
+                                document.getElementById('fiveHum').innerHTML = `${fiveDay[4].humidity}%`;  
+                                document.getElementById('fiveWind').innerHTML = `${fiveDay[4].wind_speed}%`;
+                                dayWeather = `${fiveDay[1].weather[0].icon}`
+                                dayIconUrl = `http://openweathermap.org/img/w/${dayWeather}.png`
+                                dayIconUrlEl = document.querySelector(".dayFiveIcon");
+                                dayIconUrlEl.setAttribute("src", dayIconUrl); 
                                 
                             })
                         //clear the search bar    
