@@ -44,7 +44,7 @@ var getLatInfo = function(){
                 return response.json();
             })
             .then(function(data){
-                console.log(data);
+                
                 lat =  (data.coord.lat);
                 lon = (data.coord.lon);
             }) 
@@ -57,7 +57,7 @@ var getLatInfo = function(){
                                 return response.json();
                             })
                             .then(function(data){
-                                console.log(data)
+
                                 fiveDay = data.daily;
                                 current = data.current;
                                 //post an icon for today's weather report   
@@ -133,12 +133,13 @@ var getLatInfo = function(){
 searchEl.addEventListener("click", function(){
         var tr = document.createElement("tr");
         tr.innerHTML = textEl.value;
+        cities.push(textEl.value);
         document.getElementById("history").appendChild(tr);
         tr.setAttribute("class", "tr");
         document.querySelector('.city').innerHTML = textEl.value;
         
         // store history of cities searched
-        cities.push(textEl.value);
+        
         localStorage.setItem('cityHistory', JSON.stringify(cities));
         getLatInfo();
     });        
@@ -147,18 +148,20 @@ searchEl.addEventListener("click", function(){
 
 function renderMessage(){
     // document.getElementById('date').textContent = moment().format(MM/DD/YY);
-    var history = JSON.parse(localStorage.getItem("cityHistory"));
-    if(history !== null){
-        for(i = 0; i<history.length; i++){
+    var cities = JSON.parse(localStorage.getItem("cityHistory"));
+    if(cities !== null){
+        
+        for(i = 0; i<cities.length; i++){
             var tr = document.createElement("tr");
-            tr.innerHTML = history[i];
+            tr.innerHTML = cities[i];
             document.getElementById("history").appendChild(tr);
             tr.setAttribute("class", "tr");
-            var trEl = document.querySelector(".tr")
+            var trEl = document.querySelector("#history")
             trEl.addEventListener("click", function(event){
                 textEl.value = event.target.textContent;
+                document.querySelector('.city').innerHTML = textEl.value;
                 getLatInfo();
-            })
+            });
         }
     }
 }
