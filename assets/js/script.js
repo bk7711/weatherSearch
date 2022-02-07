@@ -36,19 +36,9 @@ renderMessage();
 //post today's date
 todayDate();
 
-// response and api pull after clicking search button
-searchEl.addEventListener("click", function(){
-        var tr = document.createElement("tr");
-        tr.innerHTML = textEl.value;
-        document.getElementById("history").appendChild(tr);
-        tr.setAttribute("class", "tr");
-        document.querySelector('.city').innerHTML = textEl.value;
-        
-        // store history of cities searched
-        cities.push(textEl.value);
-        localStorage.setItem('cityHistory', JSON.stringify(cities));
 
-        //fetch latitude and longitude of city searched
+var getLatInfo = function(){
+    //fetch latitude and longitude of city searched
         fetch('https://api.openweathermap.org/data/2.5/weather?q=' + textEl.value + '&appid=c6d09d6dcb25d5e4435aa32b308559b9')
             .then(function(response){
                 return response.json();
@@ -137,8 +127,22 @@ searchEl.addEventListener("click", function(){
                         textEl.value ='';
 
             })
+}
         
-  });   
+// response and api pull after clicking search button
+searchEl.addEventListener("click", function(){
+        var tr = document.createElement("tr");
+        tr.innerHTML = textEl.value;
+        document.getElementById("history").appendChild(tr);
+        tr.setAttribute("class", "tr");
+        document.querySelector('.city').innerHTML = textEl.value;
+        
+        // store history of cities searched
+        cities.push(textEl.value);
+        localStorage.setItem('cityHistory', JSON.stringify(cities));
+        getLatInfo();
+    });        
+     
  
 
 function renderMessage(){
@@ -150,6 +154,11 @@ function renderMessage(){
             tr.innerHTML = history[i];
             document.getElementById("history").appendChild(tr);
             tr.setAttribute("class", "tr");
+            var trEl = document.querySelector(".tr")
+            trEl.addEventListener("click", function(event){
+                textEl.value = event.target.textContent;
+                getLatInfo();
+            })
         }
     }
 }
